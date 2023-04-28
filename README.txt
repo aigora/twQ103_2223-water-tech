@@ -4,9 +4,9 @@ Programa para el control de la composición del agua de las fuentes del barrio m
 
 ## Integrantes del equipo
 
-Álvaro Tornero Caramés, alvarotornero ----
-Alejandro Rodríguez Sánchez, alejandrorodriguez19 ----
-Pablo Sánchez Oliveros, pablosoliveros ----
+Álvaro Tornero Caramés, alvarotornero 
+Alejandro Rodríguez Sánchez, alejandrorodriguez19 
+Pablo Sánchez Oliveros, pablosoliveros 
 Itziar Saldaña González, itziarsg
 
 ## Objetivos del trabajo
