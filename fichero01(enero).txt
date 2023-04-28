@@ -1,5 +1,5 @@
 Parametros	pH	Conductividad Turbidez Coliformes
-Fuente_1	6	100	1	0
+Fuente_1	6,00	100	1	0
 Fuente_2	7,2	158	0	0
 Fuente_3	6,95	269	0	0
 Fuente_4	7,75	239	0	0
