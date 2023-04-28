@@ -7,7 +7,7 @@ Programa para el control de la composición del agua de las fuentes del barrio m
 Álvaro Tornero Caramés, alvarotornero ----
 Alejandro Rodríguez Sánchez, alejandrorodriguez19 ----
 Pablo Sánchez Oliveros, pablosoliveros ----
-Itziar Saldaña González, itziarsg ----
+Itziar Saldaña González, itziarsg
 
 ## Objetivos del trabajo
 
