@@ -1,11 +1,14 @@
-# [Título del trabajo]
+# [WATER TECH]
 
-[Descripción breve del proyecto a realizar (2-3 frases).]
+[Programa para el control de la composición del agua de las fuentes del barrio madrileño de Lavapiés.]
 
 ## Integrantes del equipo
 
-[Nombres, apellidos, y usuario GitHub de los integrantes del equipo.]
+[Álvaro Tornero Caramés, alvarotornero
+ Alejandro Rodríguez Sánchez, alejandrorodriguez19
+ Pablo Sánchez Oliveros, pablosoliveros
+ Itziar Saldaña González, itziarsg ]
 
 ## Objetivos del trabajo
 
-[Lista de los objetivos que se persiguen con el trabajo propuesto.]
+[Comparar, analizar y examinar los datos de las aguas de las fuentes de Lavapiés mediante el uso de sentencias de control, tipos avanzados de datos, ficheros y funciones. ]
