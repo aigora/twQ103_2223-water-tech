@@ -79,28 +79,28 @@ void mostrarMenu(int opcion) {
     return;
 };
 
-void abrirFichero(char nombreFichero[]) {
-    // Paso 1:abrir archivo
-	FILE *fichero;
+void abrirFichero(struct Taguas vector[], int tam, char nombreFichero[]) {
+    FILE *fichero;
     fichero = fopen(nombreFichero, "r");
     if (fichero == NULL) {
         printf("\nError al abrir el archivo\n");
 	}else {
-	//Paso 2: leer archivo
         printf("\nArchivo abierto correctamente.\n");
-        printf("Parametros\t\tpH\tConductividad\tTurbidez\tColiformes\n");
+        printf("Parametros\tpH\tConductividad\tTurbidez\tColiformes\n");
 
-        struct Taguas tagua;
-        while (fscanf(fichero, "%s %f %f %f %f", tagua.nombreFuente, &tagua.ph, &tagua.conductividad, &tagua.turbidez, &tagua.coliformes) != EOF) {
-            printf("\n %s\t%.2f\t%.0f\t%.0f\t%.0f\n", tagua.nombreFuente, tagua.ph, tagua.conductividad, tagua.turbidez, tagua.coliformes);
+        int i = 0;
+        while (fscanf(fichero, "%s %f %f %f %f", vector[i].nombreFuente, &vector[i].ph, &vector[i].conductividad, &vector[i].turbidez, &vector[i].coliformes) != EOF) {
+            printf("%s\t%.2f\t%.0f\t%.0f\t%.0f\n", vector[i].nombreFuente, vector[i].ph, vector[i].conductividad, vector[i].turbidez, vector[i].coliformes);
+            i++;
+            if (i >= tam) { // verificar que no se exceda el tamaño del vector
+                break;
+            }
         }
-        printf("\n");
-        
-    // Paso 3:cerrar archivo
         fclose(fichero);
     }
     return;
-}
+};
+
 
 	
 	
