@@ -11,11 +11,12 @@ struct Taguas{
 };
 
 void mostrarMenu(int);
-void abrirFichero(char[]);
+void abrirFichero(struct [], int, char[]);
 
 int main(){
 	setlocale(LC_CTYPE,("Spanish"));
 	int opcion;
+	struct Taguas vector;
 	char nombreFichero [50];
 	FILE*fichero;
 	char fichero01[] = "202301_Arroyomolinos.txt";
@@ -34,23 +35,23 @@ int main(){
         switch(opcion) {
             case 1:
                 printf("\nHa seleccionado la opción 1\n");
-                abrirFichero(fichero01);
+                abrirFichero(Taguas vector,25,fichero01);
                 break;
             case 2:
                 printf("\nHa seleccionado la opción 2\n");
-                abrirFichero(fichero02);
+                abrirFichero(Taguas vector,25, fichero02);
                 break;
             case 3:
                 printf("\nHa seleccionado la opción 3\n");
-                abrirFichero(fichero03);
+                abrirFichero(Taguas vector,25, fichero03);
                 break;
             case 4:
                 printf("\nHa seleccionado la opción 4\n");
-                abrirFichero(fichero04);
+                abrirFichero(Taguas vector,25, fichero04);
                 break;
             case 5:
                 printf("\nHa seleccionado la opción 5\n");
-                abrirFichero(fichero05);
+                abrirFichero(Taguas vector,25, fichero05);
                 break;
             case 6: 
             	printf("\nHa seleccionado la opción 6. Saliendo del programa...\n");
