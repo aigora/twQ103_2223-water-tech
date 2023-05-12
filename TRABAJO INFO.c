@@ -11,13 +11,63 @@ struct Taguas{
 };
 
 void mostrarMenu(int);
-void abrirFichero(char[]);
+int mostrarMenu2(int);
+
+void abrirFichero(struct Taguas vector[], int dim) {
+    
+	FILE *fichero;
+    
+	char nombreFichero[50];
+    
+	fichero = fopen(nombreFichero, "r");
+    
+	if (fichero == NULL) {
+        printf("\nError al abrir el archivo\n");
+	}
+	else {
+        printf("\nArchivo abierto correctamente.\n");
+        printf("Parametros\tpH\tConductividad\tTurbidez\tColiformes\n");
+
+        int i = 0;
+        while (fscanf(fichero, "%s %f %f %f %f", vector[i].nombreFuente, &vector[i].ph, &vector[i].conductividad, &vector[i].turbidez, &vector[i].coliformes) != EOF) {
+            printf("%s\t%.2f\t%.0f\t%.0f\t%.0f\n", vector[i].nombreFuente, vector[i].ph, vector[i].conductividad, vector[i].turbidez, vector[i].coliformes);
+            i++;
+            if (i >= 25) { // verificar que no se exceda el tamaño del vector
+                break;
+            }
+        }
+        
+		fclose(fichero);
+    }
+    return;
+};
+
+void fuenteespecifica(struct Taguas vector[], int dim) {
+	
+	char numero_de_fuente[50];
+	
+	FILE * pfichero;
+	
+	printf("Elija la fuente que quiera, siguiendo este  formato: Fuente_n(n=numero de la fuente):\n");
+	gets(numero_de_fuente);
+	
+	for (int i=0; i<25; i++) {
+		if(strcmp(vector[i].nombreFuente, numero_de_fuente) == 0) {
+			printf("ph %f - conductividad %f - turbidez %f  - coliformes %f\n", vector[i].ph, vector[i].conductividad, vector[i].turbidez, vector[i].coliformes);
+		}
+	}
+	return;
+}
 
 int main(){
 	setlocale(LC_CTYPE,("Spanish"));
-	int opcion;
+	
+	int opcion, opcion2, dim = 25;
+	struct Taguas vector[25];
 	char nombreFichero [50];
+	
 	FILE*fichero;
+	
 	char fichero01[] = "202301_Arroyomolinos.txt";
     char fichero02[] = "202301_Lavapiés.txt";
     char fichero03[] = "202301_Leganés.txt";
@@ -33,24 +83,33 @@ int main(){
 
         switch(opcion) {
             case 1:
-                printf("\nHa seleccionado la opción 1\n");
-                abrirFichero(fichero01);
+                
+				printf("\nHa seleccionado la opción 1\n");
+                abrirFichero(vector,dim);
+                
+                mostrarMenu2(opcion2);
+                
+                if (opcion2 == 2) {
+                	fuenteespecifica(vector,dim);
+				}
                 break;
+                
+                
             case 2:
                 printf("\nHa seleccionado la opción 2\n");
-                abrirFichero(fichero02);
+                abrirFichero(vector,dim);
                 break;
             case 3:
                 printf("\nHa seleccionado la opción 3\n");
-                abrirFichero(fichero03);
+                abrirFichero(vector, dim);
                 break;
             case 4:
                 printf("\nHa seleccionado la opción 4\n");
-                abrirFichero(fichero04);
+                abrirFichero(vector, dim);
                 break;
             case 5:
                 printf("\nHa seleccionado la opción 5\n");
-                abrirFichero(fichero05);
+                abrirFichero(vector, dim);
                 break;
             case 6: 
             	printf("\nHa seleccionado la opción 6. Saliendo del programa...\n");
@@ -68,40 +127,42 @@ int main(){
 // FUNCIONES 
 
 void mostrarMenu(int opcion) {
-    printf("\nSeleccione fichero de datos desea cargar:\n");
-    printf("1: Datos fuentes de Arroyomolinos en 01/2023\n");
+    
+	printf("\nSeleccione el barrio o municipio con el que quiera trabajar, para ver su fichero de datos de las fuentes:\n");
+    
+	printf("1: Datos fuentes de Arroyomolinos en 01/2023\n");
     printf("2: Datos fuentes de Lavapiés en 01/2023 \n");
     printf("3: Datos fuentes de Leganés en 01/2023\n");
     printf("4: Datos fuentes de Usera en 01/2023\n");
     printf("5: Datos fuentes de Vicálvaro en 01/2023\n");
     printf("6: Salir de Water Tech\n");
+	
+    return;
+};
+
+int mostrarMenu2(int opcion2) {
+	
+	while (1) {
+	printf("\nSeleccione la opción deseada de los datos de las fuentes de elegidas:\n");
     
-    return;
+    printf("1. Mostrar datos de una fuente específica.\n"); //Igual que la opción dos.
+    printf("2. Añadir datos de una fuente nueva.\n");  // Craer un nuevo fichero.
+    printf("3. Comparar fuentes.\n");
+	printf("4. Comprobar la potabilidad del agua.\n");
+	printf("5. Fuente más ácida y más básica\n");
+    printf("6. Salir\n");
+    
+    scanf ("%d", &opcion2);
+    
+    if (opcion2 < 1 && opcion2 > 6) {
+    	printf("\nOpción no válida. Por favor, seleccione una opción válida.\n");
+	} if (opcion2 >= 1 && opcion2 <= 6) {
+		break;
+	}
+}
+    return opcion2;
+	
 };
-
-void abrirFichero(struct Taguas vector[], int tam, char nombreFichero[]) {
-    FILE *fichero;
-    fichero = fopen(nombreFichero, "r");
-    if (fichero == NULL) {
-        printf("\nError al abrir el archivo\n");
-	}else {
-        printf("\nArchivo abierto correctamente.\n");
-        printf("Parametros\tpH\tConductividad\tTurbidez\tColiformes\n");
-
-        int i = 0;
-        while (fscanf(fichero, "%s %f %f %f %f", vector[i].nombreFuente, &vector[i].ph, &vector[i].conductividad, &vector[i].turbidez, &vector[i].coliformes) != EOF) {
-            printf("%s\t%.2f\t%.0f\t%.0f\t%.0f\n", vector[i].nombreFuente, vector[i].ph, vector[i].conductividad, vector[i].turbidez, vector[i].coliformes);
-            i++;
-            if (i >= tam) { // verificar que no se exceda el tamaño del vector
-                break;
-            }
-        }
-        fclose(fichero);
-    }
-    return;
-};
-
-
 	
 	
 	
