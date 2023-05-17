@@ -21,7 +21,7 @@ void mostrarMenu2(struct Taguas[], int);
 int main(){
 	setlocale(LC_CTYPE,("Spanish"));
 	
-	int municipio, opcion, dim = 25, masAcida = 0, menosAcida = 0;
+	int mes, opcion, dim = 25, masAcida = 0, menosAcida = 0;
 	struct Taguas vector[25];
 	float maxpH = vector[0].ph, minpH = vector[0].ph;
 	char aux;
@@ -34,22 +34,22 @@ int main(){
 	
 	while (1) {
 		
-		printf ("\nIntroduzca número el barrio/Municipio que quiera:\n1.Arroyomolinos.\n2.Usera.\n3.Leganés.\n4.Lavapiés.\n5.Vicalvaro.\n");
-		scanf ("%d", &municipio);
+		printf ("\nIntroduzca el mes con el fichero que quiera trabajar de Lavapiés\n 1.Enero\n 2.Febrero\n 3.Marzo\n");
+		scanf ("%d", &mes);
 		
-		if (municipio < 1 || municipio > 5) {
-			printf ("Lo siento, pero tiene que introducir un número de los municipios dados.\n");
+		if (mes < 1 || mes > 3) {
+			printf ("Lo siento, pero tiene que introducir un número de los meses dados.\n");
 		} else {
 			break;
 		}
 	}
         
-    switch(municipio) {
+    switch(mes) {
         case 1:
         {
         	printf("\nHa seleccionado la opción 1\n");
         	
-            fichero = fopen("2023_Arroyomolinos.txt", "r");
+            fichero = fopen("2023_01_Lavapiés.txt", "r");
     
 			if (fichero == NULL) {
         		printf("\nError al abrir el archivo\n");
@@ -102,6 +102,9 @@ int main(){
 				
 				printf("La fuente más ácida es la %s con un pH de %.2f\n", vector[masAcida].nombreFuente, vector[masAcida].ph);
 				printf("La fuente menos ácida es la %s con un pH de %.2f\n ", vector[menosAcida].nombreFuente, vector[menosAcida].ph);
+			} else if (opcion == 3) {
+				printf("Elija la fuente de la que quiera saber su potabilidad, siguiendo este formato: Fuente_n (n=numero de la fuente):\n");
+				scanf ("%s", numero_de_fuente);
 			}
            break;
     	}
@@ -109,7 +112,7 @@ int main(){
         {
             printf("\nHa seleccionado la opción 2\n");
             
-            fichero = fopen("2023_Usera.txt", "r");
+            fichero = fopen("2023_02_Lavapiés.txt", "r");
     
 			if (fichero == NULL) {
         		printf("\nError al abrir el archivo\n");
@@ -139,7 +142,7 @@ int main(){
         {
             printf("\nHa seleccionado la opción 3\n");
             
-            fichero = fopen("2023_Leganés.txt", "r");
+            fichero = fopen("2023_03_Lavapiés.txt", "r");
     
 			if (fichero == NULL) {
         		printf("\nError al abrir el archivo\n");
@@ -159,53 +162,11 @@ int main(){
 			fclose(fichero);
             break;
     	}
+        
         case 4:
         {
-            printf("\nHa seleccionado la opción 4\n");
-            
-            fichero = fopen("2023_Lavapiés.txt", "r");
-    
-			if (fichero == NULL) {
-        		printf("\nError al abrir el archivo\n");
-        		return 0;
-			}
-			
-			
-			while ((aux = fgetc(fichero)) != EOF) {
-				printf ("%c", aux);
-			} 
-			
-		
-			int i = 0;
-			while (fscanf(fichero, "\n%s %f %d %d %d\n", vector[i].nombreFuente, &vector[i].ph, &vector[i].conductividad, &vector[i].turbidez, &vector[i].coliformes) != EOF) {
-				i++;
-			}
-			fclose(fichero);
-            break;
-		}
-        case 5:
-        {
-        printf("\nHa seleccionado la opción 5\n");
-        
-        fichero = fopen("2023_Vicálvaro.txt", "r");
-    
-			if (fichero == NULL) {
-        		printf("\nError al abrir el archivo\n");
-        		return 0;
-			}
-			
-			
-			while ((aux = fgetc(fichero)) != EOF) {
-				printf ("%c", aux);
-			} 
-			
-		
-			int i = 0;
-			while (fscanf(fichero, "\n%s %f %d %d %d\n", vector[i].nombreFuente, &vector[i].ph, &vector[i].conductividad, &vector[i].turbidez, &vector[i].coliformes) != EOF) {
-				i++;
-			}
-			fclose(fichero);
-        break;
+        printf("HASTA LA PRÓXIMA\n EQUIPO DE WATERTECH\n");
+        return 0;
     	}
 }
 	return 0;
