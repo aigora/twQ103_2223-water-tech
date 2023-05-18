@@ -105,9 +105,18 @@ int main(){
 			} else if (opcion == 3) {
 				printf("Elija la fuente de la que quiera saber su potabilidad, siguiendo este formato: Fuente_n (n=numero de la fuente):\n");
 				scanf ("%s", numero_de_fuente);
-			}
-           break;
-    	}
+				float potable;
+				int h;
+				for (h=0; h<25; h++) {
+					if (strcmp(vector[h].nombreFuente, numero_de_fuente) == 0) {
+            			potable = vector[h].ph/vector[h].conductividad + vector[h].turbidez;
+						printf("La potabilidad de la fuente %d = %.2f ", h+1, potable); 
+            			break;
+    				} 
+					}
+				} 
+				break;
+		}
         case 2:
         {
             printf("\nHa seleccionado la opción 2\n");
@@ -181,8 +190,8 @@ void mostrarMenu2(struct Taguas vector[], int size) {
     
     printf("1. Mostrar datos de una fuente específica\n"); //Igual que la opción dos.
     printf("2. Fuente más ácida y más básica\n");  // Craer un nuevo fichero.
-    printf("3. Comparar fuentes\n");
-	printf("4. Comprobar la potabilidad del agua\n");
+    printf("3. Comprobar la potabilidad del agua\n");
+	printf("4. Comparar fuentes\n");
 	printf("5. Añadir datos de una fuente nueva\n");
     printf("6. Salir\n");
     
