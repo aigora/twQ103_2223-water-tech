@@ -72,24 +72,32 @@ int main(){
 		        
            mostrarMenu2(vector, i);
            scanf ("%d", &opcion);
-                
+             
+			 //Función 1:   
             if (opcion == 1) {
-            	printf("Elija la fuente que quiera, siguiendo este  formato: Fuente_n(n=numero de la fuente):\n");
+            	
+				printf("Elija la fuente que quiera, siguiendo este  formato: Fuente_n(n=numero de la fuente):\n");
 				scanf ("%s", numero_de_fuente);
 				
-				int encontrado = 0;
+				
 				for (int z = 0; z < i; z++) {
+					int encontrado = 0;
+					
         			if (strcmp(vector[z].nombreFuente, numero_de_fuente) == 0) {
             			printf("Fuente: %s\t pH: %.2f\t Conductividad: %d\t Turbidez: %d\t Coliformes: %d\n", vector[z].nombreFuente, vector[z].ph, vector[z].conductividad, vector[z].turbidez, vector[z].coliformes);
             			encontrado = 1;
             			break;
     				}
     			}
-				if(!encontrado){
+				if(encontrado == 0){
 					printf("No se encontró la fuente especificada\n");
-				}	
+				}
+				//Fin de la funcion 1.
+				//Función 2:	
 			} else if (opcion == 2) {
+				
 				for(int z = 1; z < i; z++){
+					
 					if(vector[z].ph > maxpH) {
 						maxpH = vector[z].ph;
 						masAcida = z;
@@ -102,6 +110,7 @@ int main(){
 				
 				printf("La fuente más ácida es la %s con un pH de %.2f\n", vector[masAcida].nombreFuente, vector[masAcida].ph);
 				printf("La fuente menos ácida es la %s con un pH de %.2f\n ", vector[menosAcida].nombreFuente, vector[menosAcida].ph);
+			
 			} else if (opcion == 3) {
 				printf("Elija la fuente de la que quiera saber su potabilidad, siguiendo este formato: Fuente_n (n=numero de la fuente):\n");
 				scanf ("%s", numero_de_fuente);

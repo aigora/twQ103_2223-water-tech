@@ -15,10 +15,46 @@ struct Taguas{
 	int coliformes;
 };
 
+//Función principal del mes de Enero:
+void mostrarMesE(struct Taguas vector[], int size) {
+	
+	FILE*fichero;
+	
+	printf("\nHa seleccionado la opción 1\n");
+        	
+    fichero = fopen("2023_01_Lavapiés.txt", "r");
+    
+	if (fichero == NULL) {
+       	printf("\nError al abrir el archivo\n");
+        return 0;
+	}
+			
+	printf("Fichero de datos cargado exitosamente\n");
+		
+	int y = 0;
+	while(fscanf(fichero, "%s %s %s %s %s", vector[y].nombre, vector[y].Ph, vector[y].Conductividad, vector[y].Turbidez, vector[y].Coliformes) != '\n'){
+		printf("%s %s %s %s %s\n", vector[y].nombre, vector[y].Ph, vector[y].Conductividad, vector[y].Turbidez, vector[y].Coliformes);
+		y++;
+		break;
+	}
+			
+	int i = 0;
+	while (fscanf(fichero, "%s %f %d %d %d", vector[i].nombreFuente, &vector[i].ph, &vector[i].conductividad, &vector[i].turbidez, &vector[i].coliformes) != EOF) {
+		printf("%s %.2f %d %d %d\n", vector[i].nombreFuente, vector[i].ph, vector[i].conductividad, vector[i].turbidez, vector[i].coliformes);
+		i++;
+	}
+	fclose(fichero);
+	
+	return;
+}
+
+
 void mostrarMenu2(struct Taguas[], int);
 
-
 int main(){
+	
+	FILE * fichero;
+	
 	setlocale(LC_CTYPE, "Spanish");
 	
 	int mes, opcion, TAM = 25;
@@ -54,7 +90,7 @@ int main(){
 	char Coliformes[] = "Coliformes";
 	
 	
-	FILE*fichero;
+
 	
 	printf("--------------------------------------------------------------- WATER TECH ---------------------------------------------------------------\n");
 	printf("\nBienvenido a Water Tech, una aplicación diseñada para ayudarte en el registro y análisis de los datos de calidad del agua en distintas fuentes de Madrid en el mes de Enero en 2023.\nCon esta herramienta, podrás cargar y almacenar ficheros de datos mensuales, realizar estadísticas y búsquedas sobre los datos, y mucho más.\nEsperamos que disfrutes utilizando Water Tech y que te sea de gran ayuda en tu investigación sobre la calidad del agua.\nSi tienes alguna pregunta o sugerencia, no dudes en contactarnos.¡Gracias por elegir Water Tech!\n");
@@ -74,51 +110,37 @@ int main(){
     switch(mes) {
         case 1:
         {
-        	printf("\nHa seleccionado la opción 1\n");
+        	int i;
+        	mostrarMesE(vector, i);
         	
-            fichero = fopen("2023_01_Lavapiés.txt", "r");
-    
-			if (fichero == NULL) {
-        		printf("\nError al abrir el archivo\n");
-        		return 0;
-			}
-			
-			printf("Fichero de datos cargado exitosamente\n");
-			int y = 0;
-			while(fscanf(fichero, "%s %s %s %s %s", vector[y].nombre, vector[y].Ph, vector[y].Conductividad, vector[y].Turbidez, vector[y].Coliformes) != '\n'){
-				printf("%s %s %s %s %s\n", vector[y].nombre, vector[y].Ph, vector[y].Conductividad, vector[y].Turbidez, vector[y].Coliformes);
-				y++;
-				break;
-			}
-			
-			int i = 0;
-			while (fscanf(fichero, "%s %f %d %d %d", vector[i].nombreFuente, &vector[i].ph, &vector[i].conductividad, &vector[i].turbidez, &vector[i].coliformes) != EOF) {
-				printf("%s %.2f %d %d %d\n", vector[i].nombreFuente, vector[i].ph, vector[i].conductividad, vector[i].turbidez, vector[i].coliformes);
-				i++;
-			}
-			fclose(fichero);
-		    
         	do{ 				
 					mostrarMenu2(vector, TAM);
         			scanf ("%d", &opcion);
-            	
+            		
+            		//Función 1:
 	            	if (opcion == 1) {
 	            		printf("Elija la fuente que quiera, siguiendo este  formato: Fuente_n(n=numero de la fuente):\n");
 						scanf ("%s", numero_de_fuente);
 				
 						int z, encontrado = 0;
 						for (z = 0; z < TAM; z++) {
+							
+							encontrado = 0;
+							
 	        				if (strcmp(vector[z].nombreFuente, numero_de_fuente) == 0) {
 	            				printf("Fuente: %s\t pH: %.2f\t Conductividad: %d\t Turbidez: %d\t Coliformes: %d\n", vector[z].nombreFuente, vector[z].ph, vector[z].conductividad, vector[z].turbidez, vector[z].coliformes);
 	            				encontrado = 1;
 	            				break;
 	    					}
 	    				}
+						
 						if(!encontrado){
 							printf("No se encontró la fuente especificada\n");
-						}		
-					} 
+						}
+						//Fín de la función 1.		
+					} //Función 2:
 					else if (opcion == 2) {
+						
 						int t;
 						for(t = 1; t < TAM; t++){
 							if(vector[t].ph > maxpH) {
@@ -130,6 +152,7 @@ int main(){
 								menosAcida = t;
 							}
 						}
+						
 						int p;
 						for(p = 1; p < TAM; p++) {
 							if(vector[p].conductividad > maxCon) {
@@ -141,6 +164,7 @@ int main(){
 								menosCon = p;
 							}
 						}
+						
 						int w;
 						for(w = 1; w < TAM; w++) {
 							if(vector[w].turbidez > maxTur) {
@@ -152,6 +176,7 @@ int main(){
 								menosTur = w;
 							}
 						}
+						
 						int q;
 						for(q = 1; q < TAM; q++) {
 							if(vector[q].coliformes > maxColi) {
@@ -172,7 +197,9 @@ int main(){
 						printf("La fuente con menos turbidez es la %s con un valor de %d\n", vector[menosTur].nombreFuente, vector[menosTur].turbidez);
 						printf("La fuente con mas coliformes es la %s con un valor de %d\n", vector[masColi].nombreFuente, vector[masColi].coliformes);
 						printf("La fuente con menos coliformes es la %s con un valor de %d\n", vector[menosColi].nombreFuente, vector[menosColi].coliformes);
-					}	 
+					
+					//Fin de la función 2.
+					}	//Función 2:
 					else if (opcion == 3) {
 				
 						printf ("Elige las fuentes, siguiendo el siguiente modelo (Fuente_n, donde 'n' es el numero de fuente), que quieras comparar.\nPrimera Fuente:\n");
@@ -254,6 +281,9 @@ int main(){
 							printf("Coliformes ----> La fuente con más coliformes es la %s con un valor de %d\n", nombrecoliformes, coliformesmayor);
 						}
 	    			}
+	    			//Fin de la función 3.
+	    			//Función 4:
+	    			
 	    			else if(opcion == 4){
 	    				printf("Elija la fuente de la que quiera saber su potabilidad, siguiendo este formato: Fuente_n (n=numero de la fuente):\n");
 	    				scanf ("%s", numero_de_fuente);
@@ -400,8 +430,7 @@ int main(){
 	return 0;
 }
 
-// FUNCIONES 
-
+// FUNCIONES:
 
 void mostrarMenu2(struct Taguas vector[], int size) {
 	
