@@ -233,7 +233,7 @@ int main(){
 	    			} while(opcion <=6);
 					
 					if (opcion == 7){
-						printf("HASTA LA PRóXIMA -EQUIPO DE WATERTECH-\n");
+						printf("HASTA LA PRÓXIMA -EQUIPO DE WATERTECH-\n");
 	        			return 0;
 					}
 			break;
@@ -298,7 +298,7 @@ int main(){
 						printf("Fichero actualizado exitosamente\n");
 					
 						FILE*fnuevo;
-						fnuevo = fopen("2023_01_Lavapiés.txt", "w");
+						fnuevo = fopen("2023_02_Lavapiés.txt", "w");
 					
 						if (fichero == NULL) {
 	        				printf("\nError al abrir el archivo\n");
@@ -380,7 +380,7 @@ int main(){
 						printf("Fichero actualizado exitosamente\n");
 					
 						FILE*fnuevo;
-						fnuevo = fopen("2023_01_Lavapiés.txt", "w");
+						fnuevo = fopen("2023_03_Lavapiés.txt", "w");
 					
 						if (fichero == NULL) {
 	        				printf("\nError al abrir el archivo\n");
